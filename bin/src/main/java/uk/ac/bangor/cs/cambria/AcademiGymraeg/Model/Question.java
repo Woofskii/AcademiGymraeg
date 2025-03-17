@@ -31,24 +31,82 @@ public class Question {
 	 */
 	@Column(nullable = false)
 	@NotBlank
-	private String questionString;
+	private String _questionString;
 
     /**
 	 * QuestionType attribute. Represents the type of this question, either English to Welsh, Welsh to English, or Gender.
 	 */
 	@Column(nullable = false)
 	@NotBlank
-	private QuestionType questionType;
+	private QuestionType _questionType;
 
     /**
 	 * correctAnswer attribute. The string containing the correct answer to the question.
 	 */
 	@Column(nullable = false)
 	@NotBlank
-	private String correctAnswer;
+	private String _correctAnswer;
 
     /**
 	 * givenAnswer attribute. The string containing the answer provided by the user
 	 */
-	private String givenAnswer;
+	private String _givenAnswer;
+
+
+    public int getId(){
+        return id;
+    }
+
+    public String getQuestionString(){
+        return _questionString;
+    }
+
+    public void setQuestionString(String questionString){
+        _questionString = questionString;
+    }
+
+    public QuestionType getQuestionType(){
+        return _questionType;
+    }
+
+    public void setQuestionType(QuestionType questionType){
+        _questionType = questionType;
+    }
+
+    public String getCorrectAnswer(){
+        return _correctAnswer;
+    }
+
+    public void setCorrectAnswer(String correctAnswer){
+        _correctAnswer = correctAnswer;
+    }
+
+    public String getGivenAnswer(){
+        return _givenAnswer;
+    }
+
+    public void setGivenAnswer(String givenAnswer){
+        _givenAnswer = givenAnswer;
+    }
+
+    @Override
+    public String toString(){
+        return _questionString;
+    }
+
+    /**
+     * 
+     * @return True if _givenAnswer is not null and not an empty string
+     */
+    public boolean hasGivenAnswer(){
+        return !(_givenAnswer == null || _givenAnswer.trim().isEmpty());
+    }
+
+    /**
+     * 
+     * @return True if _givenAnswer matches _correctAnswer, once both are trimmed of leading/trailing spaces and converted to lower case.
+     */
+    public boolean isAnswerCorrect(){
+        return _givenAnswer.trim().toLowerCase() == _correctAnswer.trim().toLowerCase();
+    }
 }
